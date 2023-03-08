@@ -676,29 +676,7 @@ class WxGroupMsgGUI(object):
         for item in self.tree_blesswords.get_children():
             index_item = self.tree_blesswords.index(item)
             self.tree_blesswords.set(item, column='index', value=index_item+1)
-    ##################################################################################
-    
-    # 绘制打赏区域，用来收费
-    def drawMoneyImage(self):
-        self.money_frame = LabelFrame(self.win,width=self.frame_width,height=50,text='如您喜欢请扫码打赏，数额随意！')
-        self.money_frame.pack()
-        # 从网络上下载我的打赏二维码
-
-        response = requests.get('https://mmbiz.qpic.cn/mmbiz_gif/ic5UCjv47FGlmkguYvSYWBzzj8Ns5njDsJN1stE21pibcAujo2JBDh995Bjhh7L2JSDNlmyTGbvvyiayia6tF6nVcQ/s640?')
-        response = response.content
-        BytesIOObj = BytesIO()
-        BytesIOObj.write(response)
-        money_image = Image.open(BytesIOObj)
-
-        w,h = money_image.size
-        ratio = 1
-        small_money_image = money_image.resize((int(w*ratio),int(h*ratio)),Image.Resampling.LANCZOS)
-        for i in range(3):
-            moeny_photo = ImageTk.PhotoImage(small_money_image)
-            image_Label = Label(self.money_frame, image=moeny_photo)
-            image_Label.image = moeny_photo # 这一句必须加上，否则不显示
-            image_Label.grid(row=0,column=i,padx=100)
-    
+    ################################################################################## 
     # mainloop 函数
     def mainLoop(self):
         self.win.mainloop()
